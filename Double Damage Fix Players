@@ -1,0 +1,35 @@
+// fix double damage in players - alvx9 18/08/2021
+// https://www.youtube.com/watch?v=k-ktZCNBWFI&feature=youtu.be&ab_channel=Alvx9
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048)
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+
+originalcode:
+mov byte ptr [esi+000001C1],00
+//mov byte ptr [esi+000001C1],01 , original code
+// esi = arrow
+//the double damage happens because this address sends 1 more arrow amount , the correct value is 0
+exit:
+jmp returnhere
+
+"game.exe"+160A3D:
+jmp newmem
+nop
+nop
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"game.exe"+160A3D:
+mov byte ptr [esi+000001C1],01
+//Alt: db C6 86 C1 01 00 00 01
