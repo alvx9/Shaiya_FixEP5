@@ -9,15 +9,25 @@ label(exit)
 
 newmem: //this is allocated memory, you have read,write,execute access
 //place your code here
+cmp byte ptr [esi + 0x0000191],#13
+je fixes1
+cmp byte ptr[esi + 0x0000191],#14
+je fixes1
+cmp byte ptr[esi + 0x0000191],#11
+je fixes1
+
 
 originalcode:
-mov byte ptr [esi+000001C1],00
-//mov byte ptr [esi+000001C1],01 , original code
+mov byte ptr [esi+000001C1],01
 // esi = arrow
 //the double damage happens because this address sends 1 more arrow amount , the correct value is 0
 
 exit:
 jmp returnhere
+
+fixes1:
+mov byte ptr [esi+000001C1],00
+jmp exit
 
 "game.exe"+163BDE:
 jmp newmem
