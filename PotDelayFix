@@ -1,0 +1,25 @@
+DWORD addrNoDelay = 0x00598BB4;
+DWORD RemoveRet = 0x00598BA0;
+_declspec(naked) void dwRemoveDelay()
+{
+	_asm {
+
+		cmp byte ptr ds:[ebp + 0x10F5],0x19
+		jne RemoveReturn
+		jmp noDelay
+
+		RemoveReturn:
+		test ecx,ecx
+		je noDelay 
+	    mov ecx, dword ptr ds:[0x0224E34C]
+		jmp RemoveRet 
+
+		noDelay:
+		jmp addrNoDelay
+	}
+}
+
+
+void dwRemoveDelay(){
+Hook((void*)0x00598B96, dwRemoveDelay, 10);
+}
