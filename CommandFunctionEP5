@@ -12,7 +12,7 @@ label(exit)
 newmem: //this is allocated memory, you have read,write,execute access
 //place your code here
 push 0x05 // String Lenght
-push // command string
+push command1// command string
 push ebp
 call game.exe+1CDF60 //CmdImput
 add esp,0x0C
@@ -43,7 +43,7 @@ jmp 0x479D21 // Cmd_Jump
 
 dep:
 push 04
-push //string your command
+push command2//string your command
 push ebp
 call game.exe+1CDF60
 add esp,0C
