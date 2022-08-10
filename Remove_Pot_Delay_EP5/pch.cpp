@@ -19,7 +19,7 @@ _declspec(naked) void dwRemoveDelay()
 		call dword ptr ds:[0x006BB2C0]
 		mov ecx, dword ptr ds:[0x0070C3C8]
 		cmp byte ptr ds : [ebp + 0x10F5] , 25 // type id
-		je Continue_No_Delay
+		je No_Delay_Addr
 		
               // ebp + 0x10F5 = Type , 0x10F6 = Type ID , if you want add more type and type id just edit this
 
